@@ -32,7 +32,7 @@ export FOP_HOME=/opt/fop/fop
 exec /opt/fop/fop/fop -c /etc/fop/fonts.xml "$@"
 EOF
 RUN chmod +x /usr/local/bin/fop
-COPY times-new-roman-cyrillic.ttf /usr/share/fonts/custom/
+COPY *.ttf /usr/share/fonts/custom/
 COPY fonts.xml /etc/fop/fonts.xml
 RUN fc-cache -fv
 COPY --from=builder /out/fopserver /usr/local/bin/fopserver

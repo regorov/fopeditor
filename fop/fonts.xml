@@ -6,33 +6,27 @@
         <auto-detect/>
         <font embed-url="/usr/share/fonts/custom/times-new-roman-cyrillic.ttf" embedding-mode="subset">
           <font-triplet name="Times New Roman" style="normal" weight="normal"/>
-          <font-triplet name="Times New Roman" style="italic" weight="normal"/>
-          <font-triplet name="Times New Roman" style="normal" weight="bold"/>
-          <font-triplet name="Times New Roman" style="italic" weight="bold"/>
           <font-triplet name="Times" style="normal" weight="normal"/>
-          <font-triplet name="Times" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/times-new-roman-cyr-bold.ttf" embedding-mode="subset">
+          <font-triplet name="Times New Roman" style="normal" weight="bold"/>
           <font-triplet name="Times" style="normal" weight="bold"/>
-          <font-triplet name="Times" style="italic" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/arial-cyr.ttf" embedding-mode="subset">
+          <font-triplet name="Arial" style="normal" weight="normal"/>
+          <font-triplet name="Helvetica" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/arial-cyr-bold.ttf" embedding-mode="subset">
+          <font-triplet name="Arial" style="normal" weight="bold"/>
+          <font-triplet name="Helvetica" style="normal" weight="bold"/>
         </font>
       </fonts>
     </renderer>
   </renderers>
   <font-substitutions>
     <substitution>
-      <from font-family="Times"/>
-      <to font-family="Liberation Serif"/>
-    </substitution>
-    <substitution>
-      <from font-family="Times New Roman"/>
-      <to font-family="Liberation Serif"/>
-    </substitution>
-    <substitution>
-      <from font-family="Arial"/>
-      <to font-family="Liberation Sans"/>
-    </substitution>
-    <substitution>
       <from font-family="Helvetica"/>
-      <to font-family="Liberation Sans"/>
+      <to font-family="Arial"/>
     </substitution>
     <substitution>
       <from font-family="Courier"/>
