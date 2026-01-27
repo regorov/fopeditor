@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  fop:
+    build: ./fop
+    ports:
+      - "8090:8090"
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    environment:
+      - PORT=8080
+      - FOP_ENDPOINT=http://fop:8090/render
+    ports:
+      - "8080:8080"
+    depends_on:
+      - fop
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

@@ -1,0 +1,49 @@
+version: '3.9'
+
+services:
+  backend:
+    image: ghcr.io/regorov/fopeditor-backend:latest
+    restart: unless-stopped
+    environment:
+      - PORT=8080
+      - FOP_ENDPOINT=http://fop:8090/render
+    depends_on:
+      - fop
+    expose:
+      - "8080"
+    networks:
+      - internal
+
+  frontend:
+    image: ghcr.io/regorov/fopeditor-frontend:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - ENABLE_TLS=true
+      - SERVER_NAME=${SERVER_NAME}
+      - CERTBOT_EMAIL=${CERTBOT_EMAIL}
+    depends_on:
+      - backend
+    networks:
+      - internal
+    volumes:
+      - frontend-certbot-etc:/etc/letsencrypt
+      - frontend-certbot-www:/var/www/certbot
+
+  fop:
+    image: ghcr.io/regorov/fopeditor-fop:latest
+    restart: unless-stopped
+    expose:
+      - "8090"
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge
+
+volumes:
+  frontend-certbot-etc:
+  frontend-certbot-www:

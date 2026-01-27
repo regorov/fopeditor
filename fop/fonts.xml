@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fop version="1.0">
+  <renderers>
+    <renderer mime="application/pdf">
+      <fonts>
+        <auto-detect/>
+        <font embed-url="/usr/share/fonts/custom/times-new-roman-cyrillic.ttf" embedding-mode="subset">
+          <font-triplet name="Times New Roman" style="normal" weight="normal"/>
+          <font-triplet name="Times New Roman" style="italic" weight="normal"/>
+          <font-triplet name="Times New Roman" style="normal" weight="bold"/>
+          <font-triplet name="Times New Roman" style="italic" weight="bold"/>
+          <font-triplet name="Times" style="normal" weight="normal"/>
+          <font-triplet name="Times" style="italic" weight="normal"/>
+          <font-triplet name="Times" style="normal" weight="bold"/>
+          <font-triplet name="Times" style="italic" weight="bold"/>
+        </font>
+      </fonts>
+    </renderer>
+  </renderers>
+  <font-substitutions>
+    <substitution>
+      <from font-family="Times"/>
+      <to font-family="Liberation Serif"/>
+    </substitution>
+    <substitution>
+      <from font-family="Times New Roman"/>
+      <to font-family="Liberation Serif"/>
+    </substitution>
+    <substitution>
+      <from font-family="Arial"/>
+      <to font-family="Liberation Sans"/>
+    </substitution>
+    <substitution>
+      <from font-family="Helvetica"/>
+      <to font-family="Liberation Sans"/>
+    </substitution>
+    <substitution>
+      <from font-family="Courier"/>
+      <to font-family="Liberation Mono"/>
+    </substitution>
+    <substitution>
+      <from font-family="Courier New"/>
+      <to font-family="Liberation Mono"/>
+    </substitution>
+    <substitution>
+      <from font-family="Noto Sans CJK"/>
+      <to font-family="Noto Sans CJK"/>
+    </substitution>
+    <substitution>
+      <from font-family="Noto Sans"/>
+      <to font-family="Noto Sans"/>
+    </substitution>
+  </font-substitutions>
+</fop>
