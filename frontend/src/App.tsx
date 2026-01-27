@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AppShell, Button, Container, Group, Stack, Text, Title } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import Editors from './components/Editors';
@@ -33,13 +33,37 @@ const sampleXml = `<?xml version="1.0" encoding="UTF-8"?>
   <customer>Jane Doe</customer>
 </invoice>`;
 
+const STORAGE_KEYS = {
+  xsl: 'fopeditor:xsl',
+  xml: 'fopeditor:xml',
+} as const;
+
+const readStoredValue = (key: string, fallback: string) => {
+  if (typeof window === 'undefined') {
+    return fallback;
+  }
+  return window.localStorage.getItem(key) ?? fallback;
+};
+
 function App() {
-  const [xsl, setXsl] = useState(sampleXsl);
-  const [xml, setXml] = useState(sampleXml);
+  const [xsl, setXsl] = useState(() => readStoredValue(STORAGE_KEYS.xsl, sampleXsl));
+  const [xml, setXml] = useState(() => readStoredValue(STORAGE_KEYS.xml, sampleXml));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [layout, setLayout] = useState<'vertical' | 'horizontal'>('vertical');
   const [splitSizes, setSplitSizes] = useState({ vertical: [50, 50] as [number, number], horizontal: [50, 50] as [number, number] });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(STORAGE_KEYS.xsl, xsl);
+    }
+  }, [xsl]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(STORAGE_KEYS.xml, xml);
+    }
+  }, [xml]);
 
   const handleRender = async () => {
     setLoading(true);

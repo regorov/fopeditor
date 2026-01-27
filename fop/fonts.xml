@@ -4,37 +4,165 @@
     <renderer mime="application/pdf">
       <fonts>
         <auto-detect/>
-        <font embed-url="/usr/share/fonts/custom/times-new-roman-cyrillic.ttf" embedding-mode="subset">
+
+        <!-- Times / Times New Roman -->
+        <font embed-url="/usr/share/fonts/custom/times/times.ttf" embedding-mode="subset">
           <font-triplet name="Times New Roman" style="normal" weight="normal"/>
           <font-triplet name="Times" style="normal" weight="normal"/>
         </font>
-        <font embed-url="/usr/share/fonts/custom/times-new-roman-cyr-bold.ttf" embedding-mode="subset">
+        <font embed-url="/usr/share/fonts/custom/times/times_i.ttf" embedding-mode="subset">
+          <font-triplet name="Times New Roman" style="italic" weight="normal"/>
+          <font-triplet name="Times" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/times/times_b.ttf" embedding-mode="subset">
           <font-triplet name="Times New Roman" style="normal" weight="bold"/>
           <font-triplet name="Times" style="normal" weight="bold"/>
         </font>
-        <font embed-url="/usr/share/fonts/custom/arial-cyr.ttf" embedding-mode="subset">
+        <font embed-url="/usr/share/fonts/custom/times/times_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Times New Roman" style="italic" weight="bold"/>
+          <font-triplet name="Times" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Arial -->
+        <font embed-url="/usr/share/fonts/custom/arial/arial.ttf" embedding-mode="subset">
           <font-triplet name="Arial" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/arial/arial_i.ttf" embedding-mode="subset">
+          <font-triplet name="Arial" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/arial/arial_b.ttf" embedding-mode="subset">
+          <font-triplet name="Arial" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/arial/arial_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Arial" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Helvetica -->
+        <font embed-url="/usr/share/fonts/custom/helvetica/helvetica.ttf" embedding-mode="subset">
           <font-triplet name="Helvetica" style="normal" weight="normal"/>
         </font>
-        <font embed-url="/usr/share/fonts/custom/arial-cyr-bold.ttf" embedding-mode="subset">
-          <font-triplet name="Arial" style="normal" weight="bold"/>
+        <font embed-url="/usr/share/fonts/custom/helvetica/helvetica_i.ttf" embedding-mode="subset">
+          <font-triplet name="Helvetica" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/helvetica/helvetica_b.ttf" embedding-mode="subset">
           <font-triplet name="Helvetica" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/helvetica/helvetica_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Helvetica" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Courier New / Courier -->
+        <font embed-url="/usr/share/fonts/custom/courier_new/courier_new.ttf" embedding-mode="subset">
+          <font-triplet name="Courier New" style="normal" weight="normal"/>
+          <font-triplet name="Courier" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/courier_new/courier_new_i.ttf" embedding-mode="subset">
+          <font-triplet name="Courier New" style="italic" weight="normal"/>
+          <font-triplet name="Courier" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/courier_new/courier_new_b.ttf" embedding-mode="subset">
+          <font-triplet name="Courier New" style="normal" weight="bold"/>
+          <font-triplet name="Courier" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/courier_new/courier_new_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Courier New" style="italic" weight="bold"/>
+          <font-triplet name="Courier" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Georgia -->
+        <font embed-url="/usr/share/fonts/custom/georgia/georgia.ttf" embedding-mode="subset">
+          <font-triplet name="Georgia" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/georgia/georgia_i.ttf" embedding-mode="subset">
+          <font-triplet name="Georgia" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/georgia/georgia_b.ttf" embedding-mode="subset">
+          <font-triplet name="Georgia" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/georgia/georgia_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Georgia" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Verdana -->
+        <font embed-url="/usr/share/fonts/custom/verdana/verdana.ttf" embedding-mode="subset">
+          <font-triplet name="Verdana" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/verdana/verdana_i.ttf" embedding-mode="subset">
+          <font-triplet name="Verdana" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/verdana/verdana_b.ttf" embedding-mode="subset">
+          <font-triplet name="Verdana" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/verdana/verdana_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Verdana" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Tahoma -->
+        <font embed-url="/usr/share/fonts/custom/tahoma/tahoma.ttf" embedding-mode="subset">
+          <font-triplet name="Tahoma" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/tahoma/tahoma_i.ttf" embedding-mode="subset">
+          <font-triplet name="Tahoma" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/tahoma/tahoma_b.ttf" embedding-mode="subset">
+          <font-triplet name="Tahoma" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/tahoma/tahoma_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Tahoma" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Trebuchet MS -->
+        <font embed-url="/usr/share/fonts/custom/trebuchet/trebuchet.ttf" embedding-mode="subset">
+          <font-triplet name="Trebuchet MS" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/trebuchet/trebuchet_i.ttf" embedding-mode="subset">
+          <font-triplet name="Trebuchet MS" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/trebuchet/trebuchet_b.ttf" embedding-mode="subset">
+          <font-triplet name="Trebuchet MS" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/trebuchet/trebuchet_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Trebuchet MS" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Comic Sans MS -->
+        <font embed-url="/usr/share/fonts/custom/comic/comic.ttf" embedding-mode="subset">
+          <font-triplet name="Comic Sans MS" style="normal" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/comic/comic_i.ttf" embedding-mode="subset">
+          <font-triplet name="Comic Sans MS" style="italic" weight="normal"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/comic/comic_b.ttf" embedding-mode="subset">
+          <font-triplet name="Comic Sans MS" style="normal" weight="bold"/>
+        </font>
+        <font embed-url="/usr/share/fonts/custom/comic/comic_bi.ttf" embedding-mode="subset">
+          <font-triplet name="Comic Sans MS" style="italic" weight="bold"/>
+        </font>
+
+        <!-- Lucida Sans Unicode -->
+        <font embed-url="/usr/share/fonts/custom/lucida-sans-unicode.ttf" embedding-mode="subset">
+          <font-triplet name="Lucida Sans Unicode" style="normal" weight="normal"/>
+        </font>
+
+        <!-- Impact -->
+        <font embed-url="/usr/share/fonts/custom/impact.ttf" embedding-mode="subset">
+          <font-triplet name="Impact" style="normal" weight="normal"/>
         </font>
       </fonts>
     </renderer>
   </renderers>
   <font-substitutions>
     <substitution>
-      <from font-family="Helvetica"/>
-      <to font-family="Arial"/>
+      <from font-family="Helvetica Neue"/>
+      <to font-family="Helvetica"/>
+    </substitution>
+    <substitution>
+      <from font-family="Times"/>
+      <to font-family="Times New Roman"/>
     </substitution>
     <substitution>
       <from font-family="Courier"/>
-      <to font-family="Liberation Mono"/>
-    </substitution>
-    <substitution>
-      <from font-family="Courier New"/>
-      <to font-family="Liberation Mono"/>
+      <to font-family="Courier New"/>
     </substitution>
     <substitution>
       <from font-family="Noto Sans CJK"/>
