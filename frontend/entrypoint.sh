@@ -20,17 +20,33 @@ if [ "${ENABLE_TLS:-false}" = "true" ]; then
     echo "[entrypoint] Bootstrapping TLS certificates for ${SERVER_NAME}"
     cp "${HTTP_CONF}" /etc/nginx/nginx.conf
     nginx -c "${HTTP_CONF}"
-    certbot certonly --non-interactive --agree-tos --email "${CERTBOT_EMAIL}" --webroot -w /var/www/certbot -d "${SERVER_NAME}"
-    nginx -c "${HTTP_CONF}" -s stop
+    if certbot certonly --non-interactive --agree-tos --email "${CERTBOT_EMAIL}" --webroot -w /var/www/certbot -d "${SERVER_NAME}"; then
+      echo "[entrypoint] Certificate request completed"
+    else
+      echo "[entrypoint] WARNING: Initial certificate request failed; serving HTTP only and will retry later."
+    fi
+    nginx -c "${HTTP_CONF}" -s stop || true
   fi
 
-  mv "${TLS_CONF}" /etc/nginx/nginx.conf
+  if [ -f "${cert_dir}/fullchain.pem" ]; then
+    cp "${TLS_CONF}" /etc/nginx/nginx.conf
+  else
+    cp "${HTTP_CONF}" /etc/nginx/nginx.conf
+  fi
 
   renew_hours=${CERTBOT_RENEW_INTERVAL_HOURS:-12}
   (
     while true; do
       sleep $((renew_hours * 3600))
-      certbot renew --webroot -w /var/www/certbot --quiet && nginx -s reload || true
+      if certbot renew --webroot -w /var/www/certbot --quiet; then
+        cp "${TLS_CONF}" /etc/nginx/nginx.conf
+        nginx -s reload || true
+      elif [ ! -f "${cert_dir}/fullchain.pem" ]; then
+        if certbot certonly --non-interactive --agree-tos --email "${CERTBOT_EMAIL}" --webroot -w /var/www/certbot -d "${SERVER_NAME}"; then
+          cp "${TLS_CONF}" /etc/nginx/nginx.conf
+          nginx -s reload || true
+        fi
+      fi
     done
   ) &
 else
