@@ -3,6 +3,7 @@ package httpapi
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
 
 	"github.com/regorov/fopeditor/backend/internal/render"
@@ -52,7 +53,8 @@ func (s *Server) handleRender(w http.ResponseWriter, r *http.Request) {
 	}
 	pdf, err := s.renderer.Render(r.Context(), req.XSL, req.XML)
 	if err != nil {
-		http.Error(w, "rendering failed", http.StatusInternalServerError)
+		log.Printf("render error: %v", err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	w.Header().Set("Content-Type", "application/pdf")

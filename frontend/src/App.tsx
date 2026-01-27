@@ -75,7 +75,7 @@ function App() {
         body: JSON.stringify({ xsl, xml }),
       });
       if (!response.ok) {
-        const message = await response.text();
+        const message = (await response.text()).trim();
         throw new Error(message || 'Render failed');
       }
       const blob = await response.blob();
@@ -91,7 +91,7 @@ function App() {
       notifications.show({
         color: 'red',
         title: 'Render failed',
-        message,
+        message: message.length > 200 ? `${message.slice(0, 200)}…` : message,
       });
     } finally {
       setLoading(false);
@@ -135,7 +135,19 @@ function App() {
               </Group>
             </Group>
             {error && (
-              <Text c="red" size="sm">
+              <Text
+                c="red"
+                size="sm"
+                style={{
+                  whiteSpace: 'pre-wrap',
+                  fontFamily: 'var(--mantine-font-family-monospace)',
+                  border: '1px solid var(--mantine-color-red-4)',
+                  borderRadius: 'var(--mantine-radius-sm)',
+                  padding: 'var(--mantine-spacing-xs)',
+                  maxHeight: 240,
+                  overflowY: 'auto',
+                }}
+              >
                 {error}
               </Text>
             )}
