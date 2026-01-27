@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.DO_USER }}
           key: ${{ secrets.DO_SSH_KEY }}
           source: "deploy/docker-compose.prod.yml"
-          target: "/opt/fopeditor/deploy/docker-compose.prod.yml"
+          target: "/opt/fopeditor"
       - name: Update deployment to use latest compose file
         uses: appleboy/ssh-action@v1.0.0
         with:
