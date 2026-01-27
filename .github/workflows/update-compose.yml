@@ -1,0 +1,37 @@
+name: Update Compose
+
+on:
+  workflow_dispatch:
+    inputs:
+      git_ref:
+        description: "Branch, tag, or commit to deploy"
+        required: false
+        default: "main"
+
+jobs:
+  update-compose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.git_ref }}
+      - name: Sync compose file over SSH
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          source: "deploy/docker-compose.prod.yml"
+          target: "/opt/fopeditor/deploy/"
+      - name: Update deployment to use latest compose file
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            cd /opt/fopeditor/deploy
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d
