@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { AppShell, Button, Container, Group, Stack, Text, Title } from '@mantine/core';
+import { AppShell, Button, Container, Group, Modal, ScrollArea, Stack, Text, Title } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import Editors from './components/Editors';
 
@@ -50,8 +50,10 @@ function App() {
   const [xml, setXml] = useState(() => readStoredValue(STORAGE_KEYS.xml, sampleXml));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
   const [layout, setLayout] = useState<'vertical' | 'horizontal'>('vertical');
   const [splitSizes, setSplitSizes] = useState({ vertical: [50, 50] as [number, number], horizontal: [50, 50] as [number, number] });
+  const [errorNotificationId, setErrorNotificationId] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -68,6 +70,7 @@ function App() {
   const handleRender = async () => {
     setLoading(true);
     setError(null);
+    setErrorModalOpen(false);
     try {
       const response = await fetch('/api/render', {
         method: 'POST',
@@ -88,11 +91,17 @@ function App() {
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unknown error';
       setError(message);
-      notifications.show({
+      setErrorModalOpen(true);
+      if (errorNotificationId) {
+        notifications.hide(errorNotificationId);
+      }
+      const id = notifications.show({
         color: 'red',
         title: 'Render failed',
-        message: message.length > 200 ? `${message.slice(0, 200)}…` : message,
+        message: 'Open details for the full error log.',
+        autoClose: false,
       });
+      setErrorNotificationId(id);
     } finally {
       setLoading(false);
     }
@@ -102,6 +111,11 @@ function App() {
     setXsl(sampleXsl);
     setXml(sampleXml);
     setError(null);
+    setErrorModalOpen(false);
+    if (errorNotificationId) {
+      notifications.hide(errorNotificationId);
+      setErrorNotificationId(null);
+    }
   };
 
   return (
@@ -134,23 +148,6 @@ function App() {
                 </Button>
               </Group>
             </Group>
-            {error && (
-              <Text
-                c="red"
-                size="sm"
-                style={{
-                  whiteSpace: 'pre-wrap',
-                  fontFamily: 'var(--mantine-font-family-monospace)',
-                  border: '1px solid var(--mantine-color-red-4)',
-                  borderRadius: 'var(--mantine-radius-sm)',
-                  padding: 'var(--mantine-spacing-xs)',
-                  maxHeight: 240,
-                  overflowY: 'auto',
-                }}
-              >
-                {error}
-              </Text>
-            )}
             <Editors
               xsl={xsl}
               xml={xml}
@@ -169,6 +166,33 @@ function App() {
           </Stack>
         </Container>
       </AppShell.Main>
+      <Modal
+        opened={errorModalOpen && Boolean(error)}
+        onClose={() => {
+          setErrorModalOpen(false);
+          if (errorNotificationId) {
+            notifications.hide(errorNotificationId);
+            setErrorNotificationId(null);
+          }
+        }}
+        title="Render failed"
+        size="80%"
+        overlayProps={{ opacity: 0.55, blur: 3 }}
+        centered
+      >
+        <ScrollArea h={300}>
+          <Text
+            size="sm"
+            c="red"
+            style={{
+              whiteSpace: 'pre-wrap',
+              fontFamily: 'var(--mantine-font-family-monospace)',
+            }}
+          >
+            {error}
+          </Text>
+        </ScrollArea>
+      </Modal>
     </AppShell>
   );
 }
