@@ -19,6 +19,6 @@ jobs:
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
             set -euo pipefail
-            cd /opt/fopeditor
+            cd /opt/fopeditor/deploy
             docker compose pull
             docker compose up -d
